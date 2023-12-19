@@ -1,0 +1,188 @@
+@font-face {
+  font-family: Vazirmatn;
+  src: url('./vazir/woff2/Vazirmatn-Thin.woff2') format('woff2');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Vazirmatn;
+  src: url('./vazir/woff2/Vazirmatn-FD-NL-Thin.woff2') format('woff2');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Vazirmatn;
+  src: url('./vazir/woff2/Vazirmatn-ExtraLight.woff2') format('woff2');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Vazirmatn;
+  src: url('./vazir/woff2/Vazirmatn-FD-NL-ExtraLight.woff2') format('woff2');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Vazirmatn;
+  src: url('./vazir/woff2/Vazirmatn-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Vazirmatn;
+  src: url('./vazir/woff2/Vazirmatn-FD-NL-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Vazirmatn;
+  src: url('./vazir/woff2/Vazirmatn-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Vazirmatn;
+  src: url('./vazir/woff2/Vazirmatn-FD-NL-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Vazirmatn;
+  src: url('./vazir/woff2/Vazirmatn-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Vazirmatn;
+  src: url('./vazir/woff2/Vazirmatn-FD-NL-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Vazirmatn;
+  src: url('./vazir/woff2/Vazirmatn-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Vazirmatn;
+  src: url('./vazir/woff2/Vazirmatn-FD-NL-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Vazirmatn;
+  src: url('./vazir/woff2/Vazirmatn-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Vazirmatn;
+  src: url('./vazir/woff2/Vazirmatn-FD-NL-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Vazirmatn;
+  src: url('./vazir/woff2/Vazirmatn-ExtraBold.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Vazirmatn;
+  src: url('./vazir/woff2/Vazirmatn-FD-NL-ExtraBold.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Vazirmatn;
+  src: url('./vazir/woff2/Vazirmatn-Black.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Vazirmatn;
+  src: url('./vazir/woff2/Vazirmatn-FD-NL-Black.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: icomoon;
+  src: url('./icomoon/icomoon.woff') format('woff');
+}
+
+@font-face {
+  font-family: icomoon;
+  src: url('./icomoon/icomoon.ttf') format('truetype');
+}
+
+/* kalameh */
+@font-face {
+  font-family: Kalamehweb;
+  font-style: normal;
+  font-weight: normal;
+  src:
+    url('./kalameh/woff2/KalamehWeb-Regular.woff2') format('woff2'),
+    /* FF39+,Chrome36+, Opera24+*/ url('fonts/woff/KalamehWeb-Regular.woff') format('woff'); /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+}
+
+@font-face {
+  font-family: Kalamehweb;
+  font-style: normal;
+  font-weight: bold;
+  src:
+    url('./kalameh/woff2/KalamehWeb-Bold.woff2') format('woff2'),
+    /* FF39+,Chrome36+, Opera24+*/ url('fonts/woff/KalamehWeb-Bold.woff') format('woff'); /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+}
+@font-face {
+  font-family: Kalameh;
+  font-style: normal;
+  font-weight: bold;
+  src:
+    url('./kalameh/woff2/KalamehWebFaNum-Bold.woff2') format('woff2'),
+    /* FF39+,Chrome36+, Opera24+*/ url('fonts/woff/KalamehWebFaNum-Bold.woff') format('woff'); /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+}
+@font-face {
+  font-family: Kalameh;
+  font-style: normal;
+  font-weight: normal;
+  src:
+    url('./kalameh/woff2/KalamehWebFaNum-Regular.woff2') format('woff2'),
+    /* FF39+,Chrome36+, Opera24+*/ url('fonts/woff/KalamehWebFaNum-Regular.woff') format('woff'); /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+}

@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ${KUBE_DEPLOYMENT}
+  namespace: ${KUBE_NAMESPACE}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ${KUBE_POD}
+  template:
+    metadata:
+      labels:
+        app: ${KUBE_POD}
+    spec:
+      containers:
+        - name: ${KUBE_CONTAINER}
+          ports:
+            - containerPort: 80
+          image: "${CI_REGISTRY_IMAGE}:${IMAGE_TAG}"
+          env:
+            - name: HOST
+              value: 0.0.0.0
+            - name: PORT
+              value: "80"
+            - name: NEXT_PUBLIC_BASE_URL
+              value: "${NEXT_PUBLIC_BASE_URL}"
+
+      imagePullSecrets:
+        - name: ${DOCKER_SECRETE}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ${KUBE_CONTAINER}
+  namespace: ${KUBE_NAMESPACE}
+spec:
+  type: ClusterIP
+  selector:
+    app: ${KUBE_POD}
+  ports:
+    - name: ${KUBE_CONTAINER}
+      protocol: TCP
+      port: 80

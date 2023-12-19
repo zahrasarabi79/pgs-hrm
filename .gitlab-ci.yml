@@ -1,0 +1,127 @@
+variables:
+  GIT_DEPTH: 1
+
+stages:
+  - build
+  - init-kube
+  - deploy
+
+default:
+  image: $CI_REGISTRY/docker/node:lts-alpine
+
+.dev-env: &dev-env
+  IMAGE_TAG: latest
+  KUBE_CONTAINER: bpms
+  KUBE_DEPLOYMENT: bpms-dep
+  KUBE_POD: bpms-pod
+  KUBE_NAMESPACE: dev
+  DOCKER_SECRETE: gitlab-registry-secret
+  NEXT_PUBLIC_BASE_URL: https://dev-api-bpms.pouyagaranautomation.com/api
+  DEPLOYMENT_FILE: deploy/dev/dev-deployment.yml
+
+.prod-env: &prod-env
+  IMAGE_TAG: $CI_COMMIT_TAG
+  KUBE_CONTAINER: bpms
+  KUBE_DEPLOYMENT: bpms-dep
+  KUBE_POD: bpms-pod
+  KUBE_NAMESPACE: prod
+  DOCKER_SECRETE: gitlab-registry-secret
+  NEXT_PUBLIC_BASE_URL: https://api-bpms.pouyagaranautomation.com/api
+  DEPLOYMENT_FILE: deploy/prod/prod-deployment.yml
+
+
+.build-docker-image: &build-docker-image
+  stage: build
+  image: docker:latest
+  services:
+    - name: docker:dind
+  before_script:
+    - echo "$CI_REGISTRY_PASSWORD" | docker login --username "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
+    - echo "$CI_DEPENDENCY_PROXY_PASSWORD" | docker login --username "$CI_DEPENDENCY_PROXY_USER" --password-stdin $CI_DEPENDENCY_PROXY_SERVER
+    - echo NEXT_PUBLIC_BASE_URL=${NEXT_PUBLIC_BASE_URL} > .env
+    - echo NEXT_PUBLIC_WORKFLOW_BASE_URL=${NEXT_PUBLIC_BASE_URL} >> .env
+    - echo NEXT_PUBLIC_AUTH=${NEXT_PUBLIC_BASE_URL} >> .env
+    - echo NEXT_PUBLIC_VERSION=${IMAGE_TAG} >> .env
+    - echo NEXT_PUBLIC_BUILD_NUMBER=${CI_PIPELINE_IID} >> .env
+  script:
+    - docker build --pull --push --build-arg CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX=${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX} -t "$CI_REGISTRY_IMAGE:$IMAGE_TAG" .
+
+build-docker-image-dev:
+  <<: *build-docker-image
+  only:
+    - dev
+    - devops
+  variables:
+    <<: *dev-env
+
+build-docker-image-prod:
+  <<: *build-docker-image
+  only:
+    - tags
+  variables:
+    <<: *prod-env
+
+.init-kube: &init-kube
+  stage: init-kube
+  image: $CI_REGISTRY/docker/envsubst:3.18.4
+  script:
+    - envsubst < $DEPLOYMENT_FILE > kube.yml
+  artifacts:
+    paths:
+      - kube.yml
+
+init-kube-dev:
+  <<: *init-kube
+  needs:
+    - job: build-docker-image-dev
+      artifacts: false
+  only:
+    - dev
+    - devops
+  variables:
+    <<: *dev-env
+
+init-kube-prod:
+  <<: *init-kube
+  needs:
+    - job: build-docker-image-prod
+      artifacts: false
+  only:
+    - tags
+  variables:
+    <<: *prod-env
+
+
+.deploy: &deploy
+  stage: deploy
+  image:
+    name: bitnami/kubectl:latest
+    entrypoint: ['']
+  before_script:
+    - kubectl config set-cluster gitlab --server=$K8S_PROXY
+    - kubectl config use-context pgs-erp-frontend/dev-ops:frontend
+  script:
+    - kubectl apply -f kube.yml
+    - kubectl rollout restart deploy/${KUBE_DEPLOYMENT} -n ${KUBE_NAMESPACE}
+
+deploy-dev:
+  <<: *deploy
+  needs:
+    - job: init-kube-dev
+      artifacts: true
+  only:
+    - dev
+    - devops
+  variables:
+    <<: *dev-env
+
+deploy-prod:
+  <<: *deploy
+  needs:
+    - job: init-kube-prod
+      artifacts: true
+  only:
+    - tags
+  variables:
+    <<: *prod-env
+

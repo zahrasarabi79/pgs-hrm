@@ -1,0 +1,50 @@
+@import url('/fonts/fonts.css');
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body,
+html {
+  max-width: 100vw;
+  font-family: 'Vazirmatn', serif;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.react-flow__controls {
+  display: flex;
+  background-color: #232138 !important;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05));
+  border-radius: 10px;
+}
+
+.react-flow__controls button {
+  position: relative;
+  background-color: #080620;
+  color: #fff;
+  border: 4px solid #2e2c42;
+  border-radius: 14px;
+  padding: 0.5rem;
+}
+
+.react-flow__controls button:hover {
+  background-color: #080620;
+  border-radius: 14px;
+}
+
+.react-flow__controls button path {
+  fill: #fff;
+}
+
+svg.error {
+  filter: drop-shadow(0px 0px 10px rgba(255, 0, 45, 0.8));
+}
+
+svg.selected {
+  filter: drop-shadow(0px 0px 15px rgba(39, 139, 229, 1));
+}
